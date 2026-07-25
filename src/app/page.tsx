@@ -1465,7 +1465,7 @@ function Pricing() {
                 </div>
 
                 <Link
-                  href="#pricing"
+                  href="/login"
                   className={`w-full text-center py-3 rounded-xl text-xs font-extrabold transition-all no-underline ${
                     plan.popular
                       ? "bg-white text-indigo-700 hover:bg-slate-100 shadow-md"

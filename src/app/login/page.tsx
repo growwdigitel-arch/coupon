@@ -17,17 +17,17 @@ export default function LoginPage() {
 
   const handleLoginSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
+    const loginEmail = email.trim() || (role === "owner" ? "admin@couponmail.io" : "hello@stylenova.in");
     setLoading(true);
     setTimeout(() => {
-      login(email, role);
+      login(loginEmail, role);
       setLoading(false);
       if (role === "owner") {
         router.push("/admin");
       } else {
         router.push("/dashboard");
       }
-    }, 600);
+    }, 400);
   };
 
   const handleQuickLogin = (demoEmail: string, demoRole: "user" | "owner") => {
@@ -141,8 +141,7 @@ export default function LoginPage() {
               <div className="relative">
                 <input
                   type="email"
-                  required
-                  placeholder={role === "owner" ? "admin@couponmail.io" : "you@company.com"}
+                  placeholder={role === "owner" ? "admin@couponmail.io" : "hello@stylenova.in"}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-indigo-500 transition-colors"
@@ -152,11 +151,10 @@ export default function LoginPage() {
 
             <div>
               <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-                Password
+                Password <span className="text-[10px] text-slate-500 font-normal">(Optional during Demo)</span>
               </label>
               <input
                 type="password"
-                required
                 placeholder="••••••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
