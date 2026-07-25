@@ -326,7 +326,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
             uploadedByName: user.name,
             uploadDate: new Date().toISOString().split("T")[0],
             rowCount: parsedRows.length > 0 ? parsedRows.length : 150,
-            data: parsedRows.length > 0 ? parsedRows : samplePriyaData,
+            data: parsedRows.length > 0 ? parsedRows : sampleStyleNovaData,
           };
 
           setUploadedFiles((prev) => [newFile, ...prev]);
