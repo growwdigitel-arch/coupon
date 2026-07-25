@@ -28,23 +28,15 @@ function FadeIn({
   dir?: "up" | "down" | "left" | "right" | "none";
   style?: React.CSSProperties;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [mounted, setMounted] = useState(false);
-  const inView = useInView(ref, { once: true, margin: "200px" });
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const y = dir === "up" ? 28 : dir === "down" ? -28 : 0;
-  const x = dir === "left" ? 28 : dir === "right" ? -28 : 0;
+  const y = dir === "up" ? 24 : dir === "down" ? -24 : 0;
+  const x = dir === "left" ? 24 : dir === "right" ? -24 : 0;
 
   return (
     <motion.div
-      ref={ref}
       initial={{ opacity: 0, y, x }}
-      animate={mounted ? { opacity: 1, y: 0, x: 0 } : { opacity: 0, y, x }}
-      transition={{ duration: 0.55, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
+      whileInView={{ opacity: 1, y: 0, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay, ease: "easeOut" }}
       className={className}
       style={style}
     >
@@ -62,14 +54,11 @@ function StaggerGrid({
   className?: string;
   gap?: number;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-40px" });
-
   return (
     <motion.div
-      ref={ref}
       initial="hidden"
-      animate={inView ? "visible" : "hidden"}
+      whileInView="visible"
+      viewport={{ once: true }}
       variants={{
         hidden: {},
         visible: { transition: { staggerChildren: gap } },
