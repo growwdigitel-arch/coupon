@@ -17,9 +17,7 @@ import {
 ══════════════════════════════════════════════════════════════════════ */
 function FadeIn({
   children,
-  delay = 0,
   className = "",
-  dir = "up",
   style,
 }: {
   children: React.ReactNode;
@@ -28,60 +26,26 @@ function FadeIn({
   dir?: "up" | "down" | "left" | "right" | "none";
   style?: React.CSSProperties;
 }) {
-  const y = dir === "up" ? 24 : dir === "down" ? -24 : 0;
-  const x = dir === "left" ? 24 : dir === "right" ? -24 : 0;
-
   return (
-    <motion.div
-      initial={{ opacity: 0, y, x }}
-      whileInView={{ opacity: 1, y: 0, x: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay, ease: "easeOut" }}
-      className={className}
-      style={style}
-    >
+    <div className={className} style={style}>
       {children}
-    </motion.div>
+    </div>
   );
 }
 
 function StaggerGrid({
   children,
   className = "",
-  gap = 0.08,
 }: {
   children: React.ReactNode;
   className?: string;
   gap?: number;
 }) {
-  return (
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-      variants={{
-        hidden: {},
-        visible: { transition: { staggerChildren: gap } },
-      }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
+  return <div className={className}>{children}</div>;
 }
 
 function StaggerItem({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  return (
-    <motion.div
-      variants={{
-        hidden: { opacity: 0, y: 20 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.21, 0.47, 0.32, 0.98] } },
-      }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
+  return <div className={className}>{children}</div>;
 }
 
 /* ══════════════════════════════════════════════════════════════════════
