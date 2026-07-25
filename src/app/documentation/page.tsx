@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 
 export default function ClientDocumentationPage() {
-  const liveUrl = "https://shut-developer-unexpected-locking.trycloudflare.com";
+  const liveUrl = "https://coupon-blue.vercel.app";
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 font-sans antialiased selection:bg-indigo-500/30 selection:text-indigo-300">
