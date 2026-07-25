@@ -29,7 +29,13 @@ function FadeIn({
   style?: React.CSSProperties;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-40px" });
+  const [mounted, setMounted] = useState(false);
+  const inView = useInView(ref, { once: true, margin: "200px" });
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const y = dir === "up" ? 28 : dir === "down" ? -28 : 0;
   const x = dir === "left" ? 28 : dir === "right" ? -28 : 0;
 
@@ -37,7 +43,7 @@ function FadeIn({
     <motion.div
       ref={ref}
       initial={{ opacity: 0, y, x }}
-      animate={inView ? { opacity: 1, y: 0, x: 0 } : {}}
+      animate={mounted ? { opacity: 1, y: 0, x: 0 } : { opacity: 0, y, x }}
       transition={{ duration: 0.55, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
       className={className}
       style={style}
